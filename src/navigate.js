@@ -1,9 +1,9 @@
 import React from 'react'
-import { createStackNavigator } from '@react-navigation/stack'
-import { NavigationContainer } from '@react-navigation/native'
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Login from './pages/Login/Login'
 
-const Stack = createStackNavigator()
+const Stack = createNativeStackNavigator();
 
 export default function MainComponents(props) {
 

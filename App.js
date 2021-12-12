@@ -8,8 +8,6 @@ import MainComponents from './src/navigate';
 export default function App() {
 
   return (
-    <Container>
        <MainComponents isAuth={false} />
-    </Container>
   );
 }
