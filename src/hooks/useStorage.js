@@ -21,3 +21,7 @@ export const getItem = async(key, obj=false) => {
         console.log('storage get error', e)
     }
 }
+
+export const clearStorage = async () => {
+    await AsyncStorage.clear();
+}

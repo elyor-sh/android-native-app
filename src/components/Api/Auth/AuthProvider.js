@@ -1,4 +1,4 @@
-import { getItem, setItem } from '../../../hooks/useStorage'
+import { clearStorage, getItem, setItem } from '../../../hooks/useStorage'
 import { httpLoginPost } from '../utils/utils'
 
 const AuthProvider =  {
@@ -27,8 +27,8 @@ const AuthProvider =  {
     checkError:(error) => {
         console.log(error)
         if(error && error.status && error.status === 401){
-            localStorage.clear()
-            window.location.assign('/login') 
+            clearStorage()
+            
         }
         return Promise.reject()
     },

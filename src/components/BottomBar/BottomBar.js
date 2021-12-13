@@ -11,14 +11,19 @@ const Tab = createBottomTabNavigator();
 
 function BottomBar() {
     return (
-        <Tab.Navigator>
+        <Tab.Navigator
+            initialRouteName="Home"
+            screenOptions={{
+                tabBarActiveTintColor: '#e91e63',
+            }}
+        >
             <Tab.Screen
                 name="Home"
                 component={Dashboard}
                 options={{
                     tabBarLabel: 'Home',
                     tabBarIcon: ({ color, size }) => (
-                      <MaterialCommunityIcons name="home" color={color} size={size} />
+                        <MaterialCommunityIcons name="home" color={color} size={size} />
                     ),
                 }}
             />
@@ -28,7 +33,7 @@ function BottomBar() {
                 options={{
                     tabBarLabel: 'Links',
                     tabBarIcon: ({ color, size }) => (
-                      <MaterialCommunityIcons name="link-variant" color={color} size={size} />
+                        <MaterialCommunityIcons name="link-variant" color={color} size={size} />
                     ),
                 }}
             />
@@ -38,17 +43,17 @@ function BottomBar() {
                 options={{
                     tabBarLabel: 'Files',
                     tabBarIcon: ({ color, size }) => (
-                      <MaterialCommunityIcons name="file-chart-outline" color={color} size={size} />
+                        <MaterialCommunityIcons name="file-chart-outline" color={color} size={size} />
                     ),
                 }}
             />
             <Tab.Screen
-                name="My profile"
+                name="Profile"
                 component={UserProfile}
                 options={{
-                    tabBarLabel: 'My profile',
+                    tabBarLabel: 'Profile',
                     tabBarIcon: ({ color, size }) => (
-                      <MaterialCommunityIcons name="account-circle-outline" color={color} size={size} />
+                        <MaterialCommunityIcons name="account-circle-outline" color={color} size={size} />
                     ),
                 }}
             />
