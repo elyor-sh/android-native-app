@@ -12,7 +12,8 @@ export const Input = (
         value = "", setValue,
         placeholder = "",
         secureTextEntry = false,
-        placeholderTextColor="#000" 
+        placeholderTextColor="#000",
+        editable = true
     }) => {
 
     return (
@@ -23,6 +24,7 @@ export const Input = (
             placeholder={placeholder}
             secureTextEntry={secureTextEntry}
             placeholderTextColor={placeholderTextColor}
+            editable={editable}
         />
     )
 }

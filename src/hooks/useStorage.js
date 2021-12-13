@@ -8,10 +8,13 @@ export const setItem = async(key, value) => {
     }
 }
 
-export const getItem = async(key) => {
+export const getItem = async(key, obj=false) => {
     try {
         const value = await AsyncStorage.getItem(key)
         if (value !== null) {
+            if(obj){
+                return JSON.parse(value)
+            }
             return value
         }
     } catch (e) {
