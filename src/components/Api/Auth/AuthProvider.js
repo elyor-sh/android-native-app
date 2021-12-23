@@ -24,11 +24,13 @@ const AuthProvider =  {
                 })
         )
     },
-    checkError:(error) => {
+    checkError: async (error, navigation) => {
         console.log(error)
         if(error && error.status && error.status === 401){
-            clearStorage()
-            
+           await clearStorage()
+            if(navigation){
+                navigation.navigate('Login')
+            }
         }
         return Promise.reject()
     },

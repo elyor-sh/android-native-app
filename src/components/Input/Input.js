@@ -4,16 +4,19 @@ import styled from 'styled-components/native'
 const InputText = styled.TextInput`
     border: 1px solid #C4C4C4;
     padding: 3px 10px 4px;
+    color: ${props => props.color}
 `
 
 export const Input = (
     {
         keyboardType = "default",
-        value = "", setValue,
+        value = "", 
+        setValue,
         placeholder = "",
         secureTextEntry = false,
         placeholderTextColor="#000",
-        editable = true
+        editable = true,
+        color="#000"
     }) => {
 
     return (
@@ -25,6 +28,7 @@ export const Input = (
             secureTextEntry={secureTextEntry}
             placeholderTextColor={placeholderTextColor}
             editable={editable}
+            color={color}
         />
     )
 }

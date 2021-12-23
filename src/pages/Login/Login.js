@@ -70,6 +70,7 @@ export default function Login({navigation}) {
                             setValue={e => setValue({ ...value, name: e })}
                             placeholder="Login"
                             placeholderTextColor="#fff"
+                            color={"#fff"}
                         />
                     </InputWrapper>
                     <InputWrapper>
@@ -79,6 +80,7 @@ export default function Login({navigation}) {
                             placeholder="Email"
                             keyboardType="email-address"
                             placeholderTextColor="#fff"
+                            color={"#fff"}
                         />
                     </InputWrapper>
                     <InputWrapper>
@@ -88,6 +90,7 @@ export default function Login({navigation}) {
                             placeholder="Password"
                             secureTextEntry={true}
                             placeholderTextColor="#fff"
+                            color={"#fff"}
                         />
                     </InputWrapper>
                     <StyledButton

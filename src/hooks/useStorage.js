@@ -1,6 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useDispatch } from 'react-redux';
 
-export const setItem = async(key, value) => {
+export const setItem = async (key, value) => {
     try {
         await AsyncStorage.setItem(key, value)
     } catch (e) {
@@ -8,11 +9,11 @@ export const setItem = async(key, value) => {
     }
 }
 
-export const getItem = async(key, obj=false) => {
+export const getItem = async (key, obj = false) => {
     try {
         const value = await AsyncStorage.getItem(key)
         if (value !== null) {
-            if(obj){
+            if (obj) {
                 return JSON.parse(value)
             }
             return value
@@ -23,5 +24,25 @@ export const getItem = async(key, obj=false) => {
 }
 
 export const clearStorage = async () => {
+
+    const dispatch = useDispatch()
+
     await AsyncStorage.clear();
+
+    dispatch(
+        {
+            type: EDIT_AUTH,
+            payload:
+            {
+                isAuth: false,
+                user: {
+                    name: '',
+                    email: '',
+                    avatar: '',
+                    id: ''
+                },
+                token: ''
+            }
+        })
+
 }
