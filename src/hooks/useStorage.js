@@ -23,7 +23,7 @@ export const getItem = async (key, obj = false) => {
     }
 }
 
-export const clearStorage = async () => {
+export const clearStorage = async (navigation) => {
 
     const dispatch = useDispatch()
 
@@ -44,5 +44,11 @@ export const clearStorage = async () => {
                 token: ''
             }
         })
+
+    if (navigation) {
+        navigation.navigate('Login')
+    }
+
+    return false
 
 }

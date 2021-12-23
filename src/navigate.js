@@ -5,6 +5,7 @@ import Login from './pages/Login/Login'
 import { useSelector } from 'react-redux';
 import Dashboard from './pages/Dashboard/Dashboard';
 import  BottomBar from './components/BottomBar/BottomBar';
+import EditLinks from './pages/EditPages/EditLinks';
 
 const Stack = createNativeStackNavigator();
 

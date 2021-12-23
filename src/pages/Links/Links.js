@@ -27,11 +27,12 @@ const LoadingWrapper = styled.Text`
     padding: 10px;
 `;
 
-export default function Links() {
+export default function Links({route, navigation}) {
 
     const [links, setLinks] = useState([])
     const [loading, setLoading] = useState(false)
     const [getItem, setGetItem] = useState(false)
+    const [updateLinks, setUpdateLinks] = useState(false)
 
     const getLinks = async () => {
         await httpLinksGet()
@@ -40,12 +41,14 @@ export default function Links() {
                 setLinks(res.data.items)
             })
             .catch(err => {
-                AuthProvider.checkError(err)
+                AuthProvider.checkError(err, navigation)
             })
     }
 
     const handleEditPress = (id) => {
-        console.log('press', id)
+        navigation.navigate('Edit link', {
+            id: id
+        })
     }
 
     const handleDeletePress = async (id) => {
@@ -65,9 +68,16 @@ export default function Links() {
             })
     }
 
+
     useEffect(() => {
         getLinks()
     }, [])
+
+    useEffect(() => {
+        if((route.params && route.params.updateLinks)){
+            getLinks()
+        }
+    }, [route.params])
 
     useEffect(() => {
         if(getItem){

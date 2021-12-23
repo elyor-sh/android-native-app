@@ -25,12 +25,9 @@ const AuthProvider =  {
         )
     },
     checkError: async (error, navigation) => {
-        console.log(error)
+        console.log('auth', error)
         if(error && error.status && error.status === 401){
-           await clearStorage()
-            if(navigation){
-                navigation.navigate('Login')
-            }
+           await clearStorage(navigation)
         }
         return Promise.reject()
     },
