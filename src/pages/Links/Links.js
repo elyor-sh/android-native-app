@@ -32,7 +32,6 @@ export default function Links({route, navigation}) {
     const [links, setLinks] = useState([])
     const [loading, setLoading] = useState(false)
     const [getItem, setGetItem] = useState(false)
-    const [updateLinks, setUpdateLinks] = useState(false)
 
     const getLinks = async () => {
         await httpLinksGet()
