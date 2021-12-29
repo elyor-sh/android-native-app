@@ -73,6 +73,8 @@ function CreateFile({navigation, setFiles}) {
     await httpFilesPost(formData)
       .then(res => {
         setFiles(res.data.items)
+        setFile('')
+        setDescription('')
       })
       .catch(err => {
         AuthProvider.checkError(err, navigation)

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components/native'
 import { SwipeListView } from 'react-native-swipe-list-view';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { httpFilesGet } from '../../components/Api/utils/utils'
+import { httpFilesDelete, httpFilesGet } from '../../components/Api/utils/utils'
 import AuthProvider from '../../components/Api/Auth/AuthProvider'
 import FileItem from '../../components/FileItem/FileItem';
 import CreateFile from '../../components/CreateFile/CreateFile';
@@ -51,8 +51,14 @@ export default function Files({ route, navigation }) {
         console.log('do', id)
     }
 
-    const handleDeletePress = (id) => {
-        console.log('de', id)
+    const handleDeletePress = async (id) => {
+        await httpFilesDelete(id)
+            .then(() => {
+                setFiles(prev => prev.filter(item => item._id !== id))
+            })
+            .catch(err => {
+                AuthProvider.checkError(err, navigation)
+            })
     }
 
     useEffect(() => {
