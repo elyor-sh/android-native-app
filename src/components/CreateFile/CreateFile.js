@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import * as DocumentPicker from 'expo-document-picker';
-import { Button, Alert, Text } from 'react-native';
+import { Alert } from 'react-native';
 import styled from 'styled-components/native';
 import { Input } from '../Input/Input';
 import { httpFilesPost } from '../Api/utils/utils';
@@ -36,7 +36,7 @@ const TextWrapper = styled.Text`
 `
 
 
-function CreateFile({navigation}) {
+function CreateFile({navigation, setFiles}) {
 
   const [description, setDescription] = useState('')
   const [file, setFile] = useState('')
@@ -58,18 +58,23 @@ function CreateFile({navigation}) {
       return
     }
 
+    const newFile = {
+      uri: file.uri,
+      type: file.mimeType,
+      name: file.name,
+    }
+
     let formData = new FormData()
-    formData.append('file', file)
+    formData.append('file', newFile)
     formData.append('description', description)
 
-    console.log(formData.get('file'))
+
 
     await httpFilesPost(formData)
       .then(res => {
-        console.log('resp', res)
+        setFiles(res.data.items)
       })
       .catch(err => {
-        console.log(err)
         AuthProvider.checkError(err, navigation)
       })
   }

@@ -65,7 +65,7 @@ export default function Files({ route, navigation }) {
 
     return (
         <>
-            <CreateFile />
+            <CreateFile setFiles={e => setFiles([...files, e])}/>
             {files && files.length > 0 ?
                 <SwipeListView
                     data={files}
