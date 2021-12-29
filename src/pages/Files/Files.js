@@ -2,10 +2,17 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components/native'
 import { SwipeListView } from 'react-native-swipe-list-view';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { httpFilesDelete, httpFilesGet } from '../../components/Api/utils/utils'
+import * as MediaLibrary from 'expo-media-library';
+import * as FileSystem from 'expo-file-system';
+import * as Permissions from 'expo-permissions';
+import { Camera } from "expo-camera";
+import { DEV_API_URL } from '@env'
+import { httpFilesDelete, httpFilesDownload, httpFilesGet } from '../../components/Api/utils/utils'
 import AuthProvider from '../../components/Api/Auth/AuthProvider'
 import FileItem from '../../components/FileItem/FileItem';
 import CreateFile from '../../components/CreateFile/CreateFile';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { getItem } from '../../hooks/useStorage';
 
 const ListWrapper = styled.View`
     padding: 5px 0px;
@@ -47,8 +54,39 @@ export default function Files({ route, navigation }) {
         console.log('ed', id)
     }
 
-    const handleDownloadPress = (id) => {
-        console.log('do', id)
+    const saveFile = async (fileUri) => {
+        const { status } = await Camera.requestCameraPermissionsAsync();
+        if (status === "granted") {
+            const asset = await MediaLibrary.createAssetAsync(fileUri);
+            const DCIM_id = asset.albumId;
+            await MediaLibrary.createAlbumAsync('ReactNative', asset);
+            await MediaLibrary.removeAssetsFromAlbumAsync([asset], DCIM_id);
+
+        }else{
+            console.log('Not permissions')
+        }
+    }
+
+    const handleDownloadPress = async (item) => {
+
+        try {
+
+            const token = await getItem('token');
+            const uri = `${DEV_API_URL}/api/files/download?id=${item._id}`
+            const fileUri = `${FileSystem.documentDirectory}/${item.name}.${item.type}`;
+            const downloadedFile = await FileSystem.downloadAsync(uri, fileUri, {
+                headers: {
+                    Authorization: 'Bearer ' + token
+                }
+            });
+
+            saveFile(downloadedFile.uri)
+
+        } catch (err) {
+            AuthProvider.checkError(err, navigation)
+        }
+
+       
     }
 
     const handleDeletePress = async (id) => {
@@ -65,13 +103,13 @@ export default function Files({ route, navigation }) {
         getFiles()
     }, [])
 
-    if(loading){
+    if (loading) {
         return <LoadingWrapper>Loading...</LoadingWrapper>
     }
 
     return (
         <>
-            <CreateFile setFiles={e => setFiles([...files, e])}/>
+            <CreateFile setFiles={e => setFiles([...files, e])} />
             {files && files.length > 0 ?
                 <SwipeListView
                     data={files}
@@ -85,7 +123,7 @@ export default function Files({ route, navigation }) {
                     renderHiddenItem={(data, rowMap) => (
                         <ListWrapper key={data.item._id + Math.random() * 100}>
                             <IconWrapper
-                                onPress={e => handleDownloadPress(data.item._id)}
+                                onPress={e => handleDownloadPress(data.item)}
                                 padding={'0px 0px 0px'}
                                 background={'#01b610'}
                             >

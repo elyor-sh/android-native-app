@@ -23,7 +23,11 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "useNextNotificationsApi": true,
+      "WRITE_EXTERNAL_STORAGE": true,
+      "READ_EXTERNAL_STORAGE": true,
+      "INTERNET": true
     },
     "web": {
       "favicon": "./assets/favicon.png"

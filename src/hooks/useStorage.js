@@ -29,21 +29,21 @@ export const clearStorage = async (navigation) => {
 
     await AsyncStorage.clear();
 
-    dispatch(
-        {
-            type: EDIT_AUTH,
-            payload:
-            {
-                isAuth: false,
-                user: {
-                    name: '',
-                    email: '',
-                    avatar: '',
-                    id: ''
-                },
-                token: ''
-            }
-        })
+    // dispatch(
+    //     {
+    //         type: EDIT_AUTH,
+    //         payload:
+    //         {
+    //             isAuth: false,
+    //             user: {
+    //                 name: '',
+    //                 email: '',
+    //                 avatar: '',
+    //                 id: ''
+    //             },
+    //             token: ''
+    //         }
+    //     })
 
     if (navigation) {
         navigation.navigate('Login')

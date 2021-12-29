@@ -18,6 +18,13 @@
     "@react-navigation/stack": "^6.0.11",
     "axios": "^0.24.0",
     "expo": "~43.0.2",
+    "expo-camera": "~12.0.3",
+    "expo-document-picker": "~10.0.3",
+    "expo-file-dl": "^2.0.0",
+    "expo-file-system": "~13.0.3",
+    "expo-image-picker": "~11.0.3",
+    "expo-media-library": "~13.0.3",
+    "expo-permissions": "~13.0.3",
     "expo-status-bar": "~1.1.0",
     "react": "17.0.1",
     "react-dom": "17.0.1",
@@ -33,9 +40,7 @@
     "react-native-web": "0.17.1",
     "react-redux": "^7.2.6",
     "redux": "^4.1.2",
-    "styled-components": "^5.3.3",
-    "expo-image-picker": "~11.0.3",
-    "expo-document-picker": "~10.0.3"
+    "styled-components": "^5.3.3"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"
